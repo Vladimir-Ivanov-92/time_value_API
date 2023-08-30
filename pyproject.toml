@@ -1,0 +1,23 @@
+[tool.poetry]
+name = "time-value-api"
+version = "0.1.0"
+description = ""
+authors = ["vova2092 <vovai2092@yandex.ru>"]
+readme = "README.md"
+packages = [{include = "time_value_api"}]
+
+[tool.poetry.dependencies]
+python = "^3.11"
+sqlalchemy = "^2.0.20"
+alembic = "^1.11.3"
+psycopg2-binary = "^2.9.7"
+fastapi = "^0.103.0"
+uvicorn = "^0.23.2"
+python-dotenv = "^1.0.0"
+fastapi-users = {extras = ["sqlalchemy"], version = "^12.1.2"}
+asyncpg = "^0.28.0"
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
