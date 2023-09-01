@@ -3,11 +3,11 @@ import uuid
 
 from fastapi_users_db_sqlalchemy import SQLAlchemyBaseUserTableUUID
 from fastapi_users_db_sqlalchemy.generics import GUID
-from sqlalchemy import Boolean, Column, String, DateTime, Integer, Float, JSON, \
+from sqlalchemy import Boolean, Column, String, DateTime, Integer, JSON, \
     ForeignKey
 from sqlalchemy.orm import Mapped, mapped_column
 
-from database import Base
+from src.database import Base
 
 UUID_ID = uuid.UUID
 
@@ -18,14 +18,6 @@ class Role(Base):
     id = Column(Integer, primary_key=True, index=True)
     name = Column(String, nullable=False)
     permission = Column(JSON)
-
-
-class Value(Base):
-    __tablename__ = "value"
-
-    id = Column(Integer, primary_key=True, index=True)
-    time = Column(DateTime, default=datetime.utcnow)
-    value = Column(Float)
 
 
 class User(SQLAlchemyBaseUserTableUUID, Base):
