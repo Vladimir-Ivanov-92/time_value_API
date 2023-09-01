@@ -2,6 +2,7 @@ import uuid
 from typing import Optional
 
 from fastapi_users import schemas
+from pydantic import EmailStr
 
 from auth.models import UUID_ID
 
@@ -9,7 +10,7 @@ from auth.models import UUID_ID
 class UserRead(schemas.BaseUser[uuid.UUID]):
     id: UUID_ID
     username: str
-    email: str
+    email: EmailStr
     role_id: int
     is_active: bool = True
     is_superuser: bool = False
@@ -19,7 +20,7 @@ class UserRead(schemas.BaseUser[uuid.UUID]):
 class UserCreate(schemas.BaseUserCreate):
     id: UUID_ID
     username: str
-    email: str
+    email: EmailStr
     password: str
     role_id: int
     is_active: Optional[bool] = True

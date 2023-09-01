@@ -1,4 +1,4 @@
-from typing import Sequence
+from typing import Sequence, Dict, Any
 
 from fastapi import APIRouter, Depends, HTTPException
 from sqlalchemy import Row
@@ -23,10 +23,10 @@ value_router = APIRouter(
 async def get_minute_aggregated_data(
         user: User = Depends(current_user),
         session: AsyncSession = Depends(get_async_session)
-) -> list[AggregatedDataShow]:
+) -> Optional[list[AggregatedDataShow]]:
     """
     Возвращает поминутно агрегированные данные таблицы 'value' если пользователь
-    аутентифицированн
+    авторизирован
     """
 
     minute_aggregated_data: Sequence[Row[_TP]] = await get_aggregated_data_from_db(
