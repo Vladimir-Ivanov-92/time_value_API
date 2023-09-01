@@ -15,6 +15,7 @@ async def get_aggregated_data_from_db(
     Обращается к БД используя SQL запрос и возвращает данные
     в виде списка объектов AggregatedDataShow
     """
+
     result = await session.execute(text(minute_aggregated_sql))
     minute_aggregated_data: Sequence[Row[_TP]] = result.fetchall()
 
