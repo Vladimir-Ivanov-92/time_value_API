@@ -1,10 +1,10 @@
-from datetime import datetime
 import uuid
+from datetime import datetime
 
 from fastapi_users_db_sqlalchemy import SQLAlchemyBaseUserTableUUID
 from fastapi_users_db_sqlalchemy.generics import GUID
-from sqlalchemy import Boolean, Column, String, DateTime, Integer, JSON, \
-    ForeignKey
+from sqlalchemy import (JSON, Boolean, Column, DateTime, ForeignKey, Integer,
+                        String)
 from sqlalchemy.orm import Mapped, mapped_column
 
 from src.database import Base
@@ -13,6 +13,9 @@ UUID_ID = uuid.UUID
 
 
 class Role(Base):
+    """
+    Создается таблица role в БД
+    """
     __tablename__ = "role"
 
     id = Column(Integer, primary_key=True, index=True)
@@ -21,6 +24,9 @@ class Role(Base):
 
 
 class User(SQLAlchemyBaseUserTableUUID, Base):
+    """
+    Создается таблица user в БД
+    """
     id: Mapped[UUID_ID] = mapped_column(GUID, primary_key=True, default=uuid.uuid4)
     email: Mapped[str] = mapped_column(
         String(length=320), unique=True, index=True, nullable=False
