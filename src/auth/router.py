@@ -2,10 +2,10 @@ from fastapi import APIRouter, Depends
 from sqlalchemy import select
 from sqlalchemy.ext.asyncio import AsyncSession
 
-from auth.base_config import auth_backend, fastapi_users, current_user
-from auth.models import User
-from auth.schemas import UserCreate, UserRead
-from database import get_async_session
+from src.auth.base_config import auth_backend, current_user, fastapi_users
+from src.auth.models import User
+from src.auth.schemas import UserCreate, UserRead
+from src.database import get_async_session
 
 auth_router = APIRouter()
 

@@ -5,8 +5,8 @@ from sqlalchemy import Row, text
 from sqlalchemy.engine.result import _TP
 from sqlalchemy.ext.asyncio import AsyncSession
 
-from database import get_async_session
-from value.sql_text import minute_aggregated_sql
+from src.database import get_async_session
+from src.value.sql_text import minute_aggregated_sql
 
 
 async def get_aggregated_data_from_db(

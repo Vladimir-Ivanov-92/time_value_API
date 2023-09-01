@@ -25,12 +25,13 @@ config.set_section_option(section, "DB_PASS", DB_PASS)
 if config.config_file_name is not None:
     fileConfig(config.config_file_name)
 
-from src.auth.models import Role, User
 # add your model's MetaData object here
 # for 'autogenerate' support
 # from myapp import mymodel
+
+from src.auth.models import *
 from src.database import Base
-from src.value.models import Value
+from src.value.models import *
 
 target_metadata = Base.metadata
 

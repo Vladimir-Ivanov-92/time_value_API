@@ -1,8 +1,8 @@
 import uvicorn
 from fastapi import APIRouter, FastAPI
 
-from auth.router import auth_router
-from value.router import value_router
+from src.auth.router import auth_router
+from src.value.router import value_router
 
 app = FastAPI(title="service_for_imported_csv_data")
 

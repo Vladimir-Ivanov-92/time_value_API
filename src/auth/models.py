@@ -7,7 +7,7 @@ from sqlalchemy import (JSON, Boolean, Column, DateTime, ForeignKey, Integer,
                         String)
 from sqlalchemy.orm import Mapped, mapped_column
 
-from src.database import Base
+from src import Base
 
 UUID_ID = uuid.UUID
 
@@ -20,7 +20,7 @@ class Role(Base):
 
     id = Column(Integer, primary_key=True, index=True)
     name = Column(String, nullable=False)
-    permission = Column(JSON)
+    permission = Column(JSON, nullable=True)
 
 
 class User(SQLAlchemyBaseUserTableUUID, Base):

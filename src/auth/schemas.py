@@ -4,7 +4,7 @@ from typing import Optional
 from fastapi_users import schemas
 from pydantic import EmailStr
 
-from auth.models import UUID_ID
+from src.auth.models import UUID_ID
 
 
 class UserRead(schemas.BaseUser[uuid.UUID]):

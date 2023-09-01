@@ -2,7 +2,7 @@ from datetime import datetime
 
 from sqlalchemy import Column, DateTime, Float, Integer
 
-from src.database import Base
+from src import Base
 
 
 class Value(Base):
