@@ -1,18 +1,64 @@
 version: '3.0'
 
+networks:
+  mynetwork:
+    driver: bridge
+
 services:
   db:
-    container_name: "db-postgres"
+    container_name: db-postgres
     image: postgres:14.1-alpine
     restart: always
+    command: -p 5433
+    expose:
+      - 5433
+    ports:
+      - "5433:5433"
     environment:
       POSTGRES_USER: postgres_user
       POSTGRES_PASSWORD: postgres_password
       POSTGRES_DB: postgres_db
+      LC_MESSAGES: en_US.utf8
+      LC_MESSAGES: C
+    env_file:
+      - .env.dev
+    networks:
+      - mynetwork
+
+  db_test:
+    container_name: db-postgres-test
+    image: postgres:14.1-alpine
+    restart: always
+    command: -p 5434
+    expose:
+      - 5434
     ports:
-      - "5434:5432"
-    volumes:
-      - ./postgres-data:/var/lib/postgresql/data
+      - "5434:5434"
+    environment:
+      POSTGRES_USER: postgres_user_test
+      POSTGRES_PASSWORD: postgres_password_test
+      POSTGRES_DB: postgres_db_test
+      LC_MESSAGES: en_US.utf8
+      LC_MESSAGES: C
+    env_file:
+      - .env.dev
+    networks:
+      - mynetwork
+
+  app:
+    container_name: app
+    build:
+      context: .
+    env_file:
+      - .env.dev
+    ports:
+      - "8080:8000"
+    command: ["/app/docker/app.sh"]
+    depends_on:
+      - db
+      - db_test
+    networks:
+      - mynetwork
 
   pgadmin:
     image: dpage/pgadmin4
@@ -22,14 +68,5 @@ services:
       PGADMIN_DEFAULT_PASSWORD: pgadmin_password
     ports:
       - "5050:80"
-
-  db_test:
-    container_name: "db-postgres-test"
-    image: postgres:14.1-alpine
-    restart: always
-    environment:
-      POSTGRES_USER: postgres_user_test
-      POSTGRES_PASSWORD: postgres_password_test
-      POSTGRES_DB: postgres_db_test
-    ports:
-      - "6000:5432"
+    networks:
+      - mynetwork
