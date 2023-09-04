@@ -3,7 +3,7 @@ from datetime import datetime, timedelta
 
 from sqlalchemy import text
 
-from database import async_session_maker
+from src.database import async_session_maker
 
 
 async def add_value_at_intervals(interval_in_sec: int, run_time_in_minutes: int):
